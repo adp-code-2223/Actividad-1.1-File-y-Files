@@ -19,6 +19,11 @@ public class FilesMain {
         EjemplosFiles.createFile(pathCrear);
 
       
+        Path origen = Paths.get (Utils.DIRECTORIO_BASE, "A - Copia");
+        Path destino = Paths.get(Utils.DIRECTORIO_BASE, "A", "B", "A - Copia");
+        EjemplosFiles.copiar(origen, destino);
+        
+        EjemplosFiles.getFileInfo(pathCrear);
 
     }
 

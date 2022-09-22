@@ -5,6 +5,7 @@
 package ud1.ejemplos.file;
 
 import java.io.File;
+
 /**
  *
  * @author maria
@@ -77,6 +78,37 @@ public class EjemplosFile {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+    }
+
+    public static boolean borrar(File f) {
+        boolean borradoAcumulado = true;
+        boolean borradoIndividual = true;
+        File[] hijos;
+        if (f.isDirectory()) {
+            hijos = f.listFiles();
+            for (File hijo : hijos) {
+                borrar(hijo);
+            }
+
+            borradoIndividual = f.delete();
+            borradoAcumulado = borradoAcumulado && borradoIndividual;
+            if (borradoIndividual) {
+                System.out.println("Se ha borrado con éxito el directorio : " + f.getAbsolutePath());
+            } else {
+                System.out.println("NO se ha borrado con éxito el directorio : " + f.getAbsolutePath());
+            }
+
+            //  borrado = borrado && f.delete();
+        } else {
+            borradoIndividual = f.delete();
+            borradoAcumulado = borradoAcumulado && borradoIndividual;
+            if (borradoIndividual) {
+                System.out.println("Se ha borrado con éxito el fichero : " + f.getAbsolutePath());
+            } else {
+                System.out.println("NO se ha borrado con éxito el fichero : " + f.getAbsolutePath());
+            }
+        }
+        return borradoAcumulado;
     }
 
 }
